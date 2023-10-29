@@ -1,8 +1,12 @@
 #pragma once
-#include <string>
+#include <iostream>
+#include <cstring>
+#include <cstdint>
 
 class Entry {
 private:
+    static uint32_t idCounter;
+    uint32_t id;
     char* website;
     char* username;
     char* password;
@@ -13,8 +17,11 @@ public:
     Entry(Entry&& other) noexcept; 
     ~Entry(); 
     
-    char* getWebsite() const;
-    char* getUsername() const;
-    char* getPassword() const;
+    const char* getWebsite() const;
+    const char* getUsername() const;
+    const char* getPassword() const;
+    void setWebsite(const char*);
+    void setUsername(const char*);
+    void setPassword(const char*);
 };
 
