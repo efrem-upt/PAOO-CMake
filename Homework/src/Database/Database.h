@@ -7,6 +7,9 @@ private:
     std::vector<Entry> entries;
 
 public:
+    Database();
+    ~Database();
     void addEntry(const Entry& entry);
-    Entry getEntry(const std::string& site) const;
+    void addEntry(const char* site, const char* user, const char* pass);
+    const Entry& getEntry(const std::string& site) const;
 };
