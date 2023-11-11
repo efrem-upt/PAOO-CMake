@@ -1,32 +1,26 @@
+#include "LoginEntry.h"
 #include "Database.h"
 #include <iostream>
 #include <cstring>
 
+using namespace Vaultify;
+using namespace Vaultify::Entries;
+
+
 int main() {
+    // Create a database
     Database db;
 
-    {
-        Entry e1("example.com", "username", "password");
-        Entry e2("example2.com", "username2", "password2");
-        Entry e3("example3.com", "username3", "password3");
+    // Create a login entry
+    LoginEntry entry("Google", "google.com", "user", "pass");
 
-        db.addEntry(e1);
-        db.addEntry(e2);
-        db.addEntry(e3);
+    // Add the entry to the database
+    db.addEntry(&entry);
 
-        Entry e4(e1);  
-        Entry e5 = std::move(e2);
-    } 
-
-    const Entry& e = db.getEntry("example.com");
-    if (strlen(e.getWebsite()) && strlen(e.getUsername()) && strlen(e.getPassword())) {
-        std::cout << "Website: " << e.getWebsite() << "\n";
-        std::cout << "Username: " << e.getUsername() << "\n";
-        std::cout << "Password: " << e.getPassword() << "\n";
-    } else {
-        std::cout << "Not found!'";
-    }
- 
+   // iterate through database and print out entries
     
+    for (auto entry : db.getEntries()) {
+        entry->display();
+    }
     return 0;
 }
