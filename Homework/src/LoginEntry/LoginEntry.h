@@ -15,8 +15,6 @@ namespace Vaultify::Entries {
         ~LoginEntry();
         LoginEntry& operator=(const LoginEntry& other);
         LoginEntry& operator=(LoginEntry&& other) noexcept;
-        virtual const char* getTitle() const override;
-        virtual void setTitle(const char* title) override;
         virtual void display() const override;
         const char* getWebsite() const;
         const char* getUsername() const;

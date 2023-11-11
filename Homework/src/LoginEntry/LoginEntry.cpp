@@ -88,16 +88,6 @@ void LoginEntry::setPassword(const char* pass) {
     strcpy(this->password, pass);
 }
 
-void LoginEntry::setTitle(const char* title) {
-    delete[] this->title;
-    this->title = new char[strlen(title) + 1];
-    strcpy(this->title, title);
-}
-
-const char* LoginEntry::getTitle() const {
-    return this->title;
-}
-
 void LoginEntry::display() const {
     std::cout << "Login Entry:\n";
     std::cout << "Title: " << this->title << std::endl;
