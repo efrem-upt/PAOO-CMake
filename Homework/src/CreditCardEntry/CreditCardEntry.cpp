@@ -109,11 +109,13 @@ void CreditCardEntry::setPin(const char* pin) {
 
 
 void CreditCardEntry::display() const {
+    std::cout << "--------------------------------------------------\n";
     std::cout << "Credit Card Entry\n";
     std::cout << "Title: " << this->title << "\n";
     std::cout << "Card Number: " << this->cardNumber << "\n";
     std::cout << "Expiration Date: " << this->expirationDate << "\n";
     std::cout << "CVV: " << this->cvv << "\n";
     std::cout << "PIN: " << this->pin << "\n";
+    std::cout << "--------------------------------------------------\n";
 }
 

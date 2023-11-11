@@ -89,9 +89,11 @@ void LoginEntry::setPassword(const char* pass) {
 }
 
 void LoginEntry::display() const {
+    std::cout << "--------------------------------------------------\n";
     std::cout << "Login Entry:\n";
     std::cout << "Title: " << this->title << std::endl;
     std::cout << "Website: " << this->website << std::endl;
     std::cout << "Username: " << this->username << std::endl;
     std::cout << "Password: " << this->password << std::endl;
+    std::cout << "--------------------------------------------------\n";
 }
