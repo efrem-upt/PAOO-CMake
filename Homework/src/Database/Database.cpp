@@ -1,5 +1,7 @@
 #include "Database.h"
 
+using namespace Vaultify;
+
 Database::Database() {
     std::cout << "(constructor): Constructor for database called\n";
 }
@@ -8,21 +10,12 @@ Database::~Database() {
     std::cout << "(destructor): Destructor for database called\n";
 }
 
-void Database::addEntry(const Entry& entry) {
-    entries.push_back(entry);
+void Database::addEntry(Entry* entry) {
+    std::cout << "(add_entry): Added entry " << entry->getId() << " to database\n";
+    this->entries.push_back(entry);
 }
 
-void Database::addEntry(const char* site, const char* user, const char* pass) {
-        entries.emplace_back(site, user, pass);
-}
-
-const Entry& Database::getEntry(const std::string& site) const {
-    for (const auto& entry : entries) {
-        if (entry.getWebsite() == site) {
-            return entry;
-        }
-    }
-
-    throw std::runtime_error("Entry not found");
+const std::vector<Entry*>& Database::getEntries() const {
+    return this->entries;
 }
 
