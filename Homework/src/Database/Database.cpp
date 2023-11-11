@@ -8,6 +8,9 @@ Database::Database() {
 
 Database::~Database() {
     std::cout << "(destructor): Destructor for database called\n";
+    for (auto entry : this->entries) {
+        delete entry;
+    }
 }
 
 void Database::addEntry(Entry* entry) {
