@@ -44,3 +44,13 @@ Entry::~Entry() {
 int Entry::getId() const {
     return id;
 }
+
+const char* Entry::getTitle() const {
+    return this->title;
+}
+
+void Entry::setTitle(const char* new_title) {
+    delete[] this->title;
+    this->title = new char[strlen(new_title) + 1];
+    strcpy(this->title, new_title);
+}

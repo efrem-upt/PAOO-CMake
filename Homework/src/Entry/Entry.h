@@ -19,6 +19,8 @@ namespace Vaultify::Entries {
         Entry(Entry&& other) noexcept; 
         ~Entry(); 
         int getId() const;
+        virtual const char* getTitle() const override;
+        virtual void setTitle(const char* title) override;
     };
 
 }
