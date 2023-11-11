@@ -1,27 +1,26 @@
 #pragma once
+#include "IEntry.h"
 #include <iostream>
 #include <cstring>
 #include <cstdint>
+#define MOVED_ID_VALUE -1
 
-class Entry {
-private:
-    static uint32_t idCounter;
-    uint32_t id;
-    char* website;
-    char* username;
-    char* password;
+namespace Vaultify::Entries {
 
-public:
-    Entry(const char* site, const char* user, const char* pass);
-    Entry(const Entry& other); 
-    Entry(Entry&& other) noexcept; 
-    ~Entry(); 
-    
-    const char* getWebsite() const;
-    const char* getUsername() const;
-    const char* getPassword() const;
-    void setWebsite(const char*);
-    void setUsername(const char*);
-    void setPassword(const char*);
-};
+    class Entry : public IEntry {
+    protected:
+        char* title;
+        static uint32_t idCounter;
+        uint32_t id;    
+    public:
+        Entry();
+        Entry(const char* title);
+        Entry(const Entry& other); 
+        Entry(Entry&& other) noexcept; 
+        ~Entry(); 
+        int getId() const;
+    };
+
+}
+
 
