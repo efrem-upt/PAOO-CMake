@@ -1,21 +1,27 @@
 #pragma once
-#include "Entry.h"
 #include <vector>
+#include <memory>
+#include <semaphore>
+#include <barrier>
 
-using namespace Vaultify::Entries;
+#define MAX_ACCOUNTS_PROCESSED 3
+
+namespace Vaultify::Entries {
+    class Entry;  
+}
 
 namespace Vaultify {
     class Database {
     private:
-        char* masterPassword;
-        std::vector<Entry*> entries;
+        std::counting_semaphore<1> sem;
+        std::barrier<> checkAccountsBarrier;
+        std::vector<std::shared_ptr<Vaultify::Entries::Entry>> entries; 
 
     public:
         Database();
         ~Database();
-        void addEntry(Entry* entry);
-        const std::vector<Entry*>& getEntries() const;
-        void setMasterPassword(const char* pass);
-        const char* getMasterPassword() const;
+        void addEntry(std::shared_ptr<Vaultify::Entries::Entry> entry); 
+        const std::vector<std::shared_ptr<Vaultify::Entries::Entry>>& getEntries() const; 
+        void checkAccounts();
     };
 }
