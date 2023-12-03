@@ -2,6 +2,7 @@
 #include "CreditCardEntry.h"
 #include "SecureNoteEntry.h"
 #include "Database.h"
+#include <thread>
 #include <iostream>
 #include <cstring>
 
@@ -13,32 +14,34 @@ int main() {
     // Create a database
     Database db;
 
-    // Create a login entry
-    LoginEntry entry("Google", "google.com", "user", "pass");
+   // make 3 threads that add entries to the database
 
-    // create a credit card entry
+    std::thread t1([&db]() {
+        db.addEntry(std::make_shared<LoginEntry>("Google", "google.com", "user1", "pass1"));
+    });
 
-    CreditCardEntry ccEntry("Visa", "1234 5678 9012 3456", "John Doe", "01/23", "123");
+    std::thread t2([&db]() {
+        db.addEntry(std::make_shared<CreditCardEntry>("Credit Card", "1234 5678 9012 3456", "12/24", "123", "1234"));
+    });
 
-    // create a secure note entry
+    std::thread t3([&db]() {
+        db.addEntry(std::make_shared<SecureNoteEntry>("Note", "This is a note"));
+    });
 
-    SecureNoteEntry snEntry("My Note", "This is a note");
+    std::thread t4([&db]() {
+        db.addEntry(std::make_shared<LoginEntry>("Facebook", "facebook.com", "user2", "pass2"));
+    });
 
-    // Add the entry to the database
-    db.addEntry(&entry);
+    std::thread t5([&db]() {
+        db.addEntry(std::make_shared<LoginEntry>("Twitter", "twitter.com", "user3", "pass3"));
+    });
 
-    // Add the credit card entry to the database
-
-    db.addEntry(&ccEntry);
-
-    // Add the secure note entry to the database
-
-    db.addEntry(&snEntry);
-
-   // iterate through database and print out entries
+    t1.join(); 
+    t2.join();
+    t3.join();
+    t4.join();
+    t5.join();
     
-    for (auto entry : db.getEntries()) {
-        entry->display();
-    }
+    db.checkAccounts();
     return 0;
 }
